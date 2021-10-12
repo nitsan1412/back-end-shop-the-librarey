@@ -9,11 +9,9 @@ const orderSchema = Joi.object({
   deliveryDate: Joi.date().less("now"),
   products: Joi.array().items(
     Joi.object({
-      _id: Joi.string(),
-      productID: Joi.number().integer(),
+      item: Joi.any(),
       amount: Joi.number().integer().min(1),
       format: Joi.string(),
-      totalSum: Joi.number(),
     })
   ),
   status: Joi.string().pattern(

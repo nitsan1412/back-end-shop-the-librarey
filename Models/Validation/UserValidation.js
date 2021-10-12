@@ -1,9 +1,6 @@
 const Joi = require("joi");
 
 const userSchema = Joi.object({
-  email: Joi.string()
-    .email({ tlds: { allow: false } })
-    .required(),
   _id: Joi.string(),
   id: Joi.number(),
   active: Joi.boolean(),
@@ -11,6 +8,9 @@ const userSchema = Joi.object({
     firstName: Joi.string().min(3).max(30).required(),
     lastName: Joi.string().min(3).max(100).required(),
   },
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required(),
   password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
   phone: Joi.string().pattern(new RegExp("^[0-9-+]{3,30}$")),
   role: Joi.string().pattern(new RegExp("(admin)|(user)|(customer)")),
@@ -27,7 +27,7 @@ const userSchema = Joi.object({
   currCart: Joi.array().items(
     Joi.object({
       _id: Joi.string(),
-      product: Joi.any(),
+      item: Joi.any(),
       amount: Joi.number().integer().min(1),
       format: Joi.string(),
     })
@@ -35,7 +35,7 @@ const userSchema = Joi.object({
   currWishlist: Joi.array().items(
     Joi.object({
       _id: Joi.string(),
-      product: Joi.any(),
+      item: Joi.any(),
       amount: Joi.number().integer().min(1),
       format: Joi.string(),
     })

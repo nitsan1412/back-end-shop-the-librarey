@@ -3,19 +3,34 @@ const mongoose = require("mongoose");
 
 const ordersModel = require("../Models/Order");
 
-exports.getAll = (req, res) => {
-  ordersModel.find({}, (err, orders) => {
-    order = orders.populate("product").populate("user");
-
-    err ? res.status(500).send("error") : res.json(orders);
-  });
+exports.getAll = async (req, res) => {
+  try {
+    let orders = await ordersModel
+      .find({})
+      .populate("user")
+      .populate({
+        path: "products",
+        populate: { path: "item" },
+      });
+    res.status(200).send(orders);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
-exports.getOne = (req, res) => {
-  ordersModel.findOne({ id: req.params.id }, (err, order) => {
-    order = orders.populate("product").populate("user");
-    err ? res.status(500).send("error") : res.status(200).send(order);
-  });
+exports.getOne = async (req, res) => {
+  try {
+    let order = await ordersModel
+      .findOne({ id: req.params.id })
+      .populate("user")
+      .populate({
+        path: "products",
+        populate: { path: "item" },
+      });
+    res.status(200).send(order);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
 exports.create = (req, res) => {

@@ -3,16 +3,21 @@ const Joi = require("joi");
 const postSchema = Joi.object({
   _id: Joi.string(),
   id: Joi.number(),
-  writerUserId: Joi.number(),
-  writer: {
-    firstName: Joi.string().min(2).max(15),
-    lastName: Joi.string().min(2).max(15),
-  },
+  user: Joi.any(),
   date: Joi.date(),
   approved: Joi.boolean(),
   headline: Joi.string().min(2).max(100),
   text: Joi.string().min(10),
-  comments: Joi.any(),
+  comments: Joi.array().items(
+    Joi.object({
+      _id: Joi.string(),
+      commentID: Joi.number(),
+      approved: Joi.boolean(),
+      user: Joi.any(),
+      headline: Joi.string().min(2).max(100),
+      text: Joi.string().min(10),
+    })
+  ),
 });
 
 const paramSchema = Joi.object({

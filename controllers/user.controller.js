@@ -6,7 +6,17 @@ const usersModel = require("../Models/User");
 
 exports.getAll = async (req, res) => {
   try {
-    let users = await usersModel.find({}).populate("product");
+    let users = await usersModel
+      .find({})
+      .populate({
+        path: "currCart",
+        populate: { path: "item" },
+      })
+      .populate({
+        path: "currWishlist",
+        populate: { path: "item" },
+      });
+
     res.status(200).send(users);
   } catch (err) {
     res.status(500).send(err);
@@ -17,7 +27,14 @@ exports.getOne = async (req, res) => {
   try {
     let user = await usersModel
       .findOne({ id: req.params.id })
-      .populate("product");
+      .populate({
+        path: "currCart",
+        populate: { path: "item" },
+      })
+      .populate({
+        path: "currWishlist",
+        populate: { path: "item" },
+      });
     res.status(200).send(user);
   } catch (err) {
     res.status(500).send(err);

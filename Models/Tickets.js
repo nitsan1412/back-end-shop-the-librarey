@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
+const { User } = require("./User");
 
 const ticketSchema = new Schema({
-  ticketId: Number,
+  id: Number,
   status: String,
-  User: {
+  user: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "User",
   },
+  subject: String,
+  date: String,
   header: String,
   content: String,
   response: String,

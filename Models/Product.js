@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectId } = require("mongodb");
 
 const Schema = mongoose.Schema;
 const { Author } = require("./Author");
@@ -24,7 +25,7 @@ const productSchema = new Schema({
   title: String,
   author: {
     type: Schema.Types.ObjectId,
-    ref: "authors",
+    ref: "Author",
     required: true,
   },
   coverImg: String,

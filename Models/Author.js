@@ -8,4 +8,4 @@ const authorSchema = new Schema({
   lastName: String,
 });
 
-module.exports = mongoose.model("author", authorSchema);
+module.exports = mongoose.model("Author", authorSchema);

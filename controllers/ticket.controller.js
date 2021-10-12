@@ -1,18 +1,26 @@
 require("../data/database");
-const ticketsModel = require("../Models/Ticket");
+const mongoose = require("mongoose");
 
-exports.getAll = (req, res) => {
-  ticketsModel.find({}, (err, tickets) => {
-    ticket = tickets.populate("user");
-    err ? res.status(500).send("error") : res.json(tickets);
-  });
+const ticketsModel = require("../Models/Tickets");
+
+exports.getAll = async (req, res) => {
+  try {
+    let tickets = await ticketsModel.find({}).populate("user");
+    res.status(200).send(tickets);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
-exports.getOne = (req, res) => {
-  ticketsModel.findOne({ id: req.params.id }, (err, ticket) => {
-    ticket = tickets.populate("user");
-    err ? res.status(500).send("error") : res.status(200).send(ticket);
-  });
+exports.getOne = async (req, res) => {
+  try {
+    let ticket = await ticketsModel
+      .findOne({ id: req.params.id })
+      .populate("user");
+    res.status(200).send(ticket);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
 exports.create = (req, res) => {

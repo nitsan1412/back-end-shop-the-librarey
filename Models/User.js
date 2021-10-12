@@ -1,19 +1,10 @@
 const mongoose = require("mongoose");
+const { ObjectId } = require("mongodb");
 
 const Schema = mongoose.Schema;
-const { Products } = require("./Product");
-// const { CartItem } = require("./Order");
+const { Product } = require("./Product");
 
-const cartItemSchemaUser = new Schema({
-  product: {
-    type: Schema.Types.ObjectId,
-    ref: "products",
-    required: true,
-  },
-  amount: Number,
-  format: String,
-  totalSum: Number,
-});
+// const cartItemSchemaUser = new Schema();
 
 const userSchema = new Schema({
   id: Number,
@@ -36,8 +27,28 @@ const userSchema = new Schema({
     entrence: String,
     zipcode: Number,
   },
-  currCart: [cartItemSchemaUser],
-  currWishlist: [cartItemSchemaUser],
+  currCart: [
+    {
+      item: {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+        required: true,
+      },
+      amount: Number,
+      format: String,
+    },
+  ],
+  currWishlist: [
+    {
+      item: {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+        required: true,
+      },
+      amount: Number,
+      format: String,
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);

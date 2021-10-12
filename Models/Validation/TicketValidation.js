@@ -5,6 +5,10 @@ const ticketSchema = Joi.object({
   id: Joi.number(),
   status: Joi.string().pattern(new RegExp("(PENDING)|(ACCEPTED)|(REJECTED)")),
   user: Joi.any(),
+  subject: Joi.string().pattern(
+    new RegExp("(Orders)|(Products)|(TechnicalProblem)|(PersonalIsuue)|(Other)")
+  ),
+  date: Joi.date().less("now"),
   header: Joi.string().min(2).max(100),
   content: Joi.string(),
   response: Joi.string().empty(),

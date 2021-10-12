@@ -1,16 +1,36 @@
 require("../data/database");
+const mongoose = require("mongoose");
+
 const postsModel = require("../Models/Post");
 
-exports.getAll = (req, res) => {
-  postsModel.find({}, (err, posts) => {
-    err ? res.status(500).send("error") : res.json(posts);
-  });
+exports.getAll = async (req, res) => {
+  try {
+    let posts = await postsModel
+      .find({})
+      .populate("writer")
+      .populate({
+        path: "comments",
+        populate: { path: "user" },
+      });
+    res.status(200).send(posts);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
-exports.getOne = (req, res) => {
-  postsModel.findOne({ id: req.params.id }, (err, post) => {
-    err ? res.status(500).send("error") : res.status(200).send(post);
-  });
+exports.getOne = async (req, res) => {
+  try {
+    let post = await postsModel
+      .findOne({ id: req.params.id })
+      .populate("writer")
+      .populate({
+        path: "comments",
+        populate: { path: "user" },
+      });
+    res.status(200).send(post);
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
 exports.create = (req, res) => {

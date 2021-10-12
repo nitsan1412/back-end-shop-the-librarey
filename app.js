@@ -4,6 +4,8 @@ const productRouter = require("./routes/products");
 const authorRouter = require("./routes/authors");
 const postRouter = require("./routes/posts");
 const orderRouter = require("./routes/orders");
+const ticketRouter = require("./routes/tickets");
+
 const cors = require("cors");
 
 const app = express();
@@ -32,5 +34,6 @@ app.use("/products", productRouter);
 app.use("/authors", authorRouter);
 app.use("/posts", postRouter);
 app.use("/orders", orderRouter);
+app.use("/tickets", ticketRouter);
 
 app.listen(5000);
