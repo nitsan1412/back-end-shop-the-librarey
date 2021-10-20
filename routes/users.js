@@ -44,6 +44,15 @@ router.put(
   userController.update
 );
 
+router.patch(
+  "/:id",
+  validator.body(userSchema),
+  joiErrors,
+  userController.patch
+);
+
+router.post("/login", userController.login);
+
 // router.post("/", userController.create);
 
 // router.put("/:id", userController.update);

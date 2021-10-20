@@ -1,14 +1,17 @@
 const Joi = require("joi");
 
 const orderSchema = Joi.object({
+  _v: Joi.any(),
   _id: Joi.string(),
-  id: Joi.number(),
+  id: Joi.string(),
   reference: Joi.string().min(2).max(100),
   user: Joi.any(),
   orderDate: Joi.date().less("now"),
   deliveryDate: Joi.date().less("now"),
   products: Joi.array().items(
     Joi.object({
+      _v: Joi.any(),
+      _id: Joi.string(),
       item: Joi.any(),
       amount: Joi.number().integer().min(1),
       format: Joi.string(),
@@ -21,13 +24,15 @@ const orderSchema = Joi.object({
   ),
   active: Joi.boolean(),
   totalSum: Joi.number(),
-  deliveryOption: Joi.string().pattern(
-    new RegExp(
-      "(Mail-Box-Delivery)|(Door-to-Door-Delivery)|(24-Hours-Delivery)"
-    )
-  ),
-  dliveryPrice: Joi.number(),
-  cuponValue: Joi.string(),
+  deliveryOption: Joi.string()
+    .empty("")
+    .pattern(
+      new RegExp(
+        "(Mail-Box-Delivery)|(Door-to-Door-Delivery)|(24-Hours-Delivery)|()"
+      )
+    ),
+  dliveryPrice: Joi.number().empty(),
+  cuponValue: Joi.number().empty(),
 });
 
 const paramSchema = Joi.object({

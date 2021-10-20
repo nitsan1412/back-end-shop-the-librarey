@@ -40,6 +40,27 @@ exports.getOne = async (req, res) => {
     res.status(500).send(err);
   }
 };
+// ("/users/login")
+exports.login = (req, res) => {
+  try {
+    usersModel
+      .findOne({ email: req.body.email })
+      .populate({
+        path: "currCart",
+        populate: { path: "item" },
+      })
+      .populate({
+        path: "currWishlist",
+        populate: { path: "item" },
+      })
+      .exec()
+      .then((user) => {
+        res.status(200).send(user);
+      });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
 
 exports.create = (req, res) => {
   const userItem = new usersModel(req.body);
@@ -47,6 +68,16 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
+  usersModel.findOneAndUpdate(
+    { id: req.body.id },
+    { $set: req.body },
+    (err, updateUser) => {
+      err ? res.status(500).send("error") : res.status(200).send(updateUser);
+    }
+  );
+};
+
+exports.patch = (req, res) => {
   usersModel.findOneAndUpdate(
     { id: req.body.id },
     { $set: req.body },

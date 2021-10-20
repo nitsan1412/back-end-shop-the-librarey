@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 
 // const cartItemSchema = new Schema();
 const orderSchema = new Schema({
-  id: Number,
+  id: String,
   reference: String,
   user: {
     type: Schema.Types.ObjectId,
@@ -22,7 +22,6 @@ const orderSchema = new Schema({
       item: {
         type: Schema.Types.ObjectId,
         ref: "Product",
-        required: true,
       },
       amount: Number,
       format: String,
@@ -33,7 +32,7 @@ const orderSchema = new Schema({
   totalSum: Number,
   deliveryOption: String,
   dliveryPrice: Number,
-  cuponValue: String,
+  cuponValue: Number,
 });
 
 module.exports = mongoose.model("Order", orderSchema);

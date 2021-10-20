@@ -7,7 +7,7 @@ const { Product } = require("./Product");
 // const cartItemSchemaUser = new Schema();
 
 const userSchema = new Schema({
-  id: Number,
+  id: String,
   active: Boolean,
   name: {
     firstName: String,
@@ -32,7 +32,6 @@ const userSchema = new Schema({
       item: {
         type: Schema.Types.ObjectId,
         ref: "Product",
-        required: true,
       },
       amount: Number,
       format: String,
@@ -43,7 +42,6 @@ const userSchema = new Schema({
       item: {
         type: Schema.Types.ObjectId,
         ref: "Product",
-        required: true,
       },
       amount: Number,
       format: String,

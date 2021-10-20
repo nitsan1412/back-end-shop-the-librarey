@@ -49,6 +49,9 @@ router.put(
   orderController.update
 );
 
+router.post("/perUser", orderController.perUser);
+
+
 router.delete("/", orderController.delete);
 
 module.exports = router;
