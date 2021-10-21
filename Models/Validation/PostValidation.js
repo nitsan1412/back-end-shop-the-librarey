@@ -1,6 +1,7 @@
 const Joi = require("joi");
 
 const postSchema = Joi.object({
+  _v: Joi.any(),
   _id: Joi.string(),
   id: Joi.number(),
   user: Joi.any(),

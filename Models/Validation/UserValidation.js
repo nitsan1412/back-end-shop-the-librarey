@@ -1,6 +1,7 @@
 const Joi = require("joi");
 
 const userSchema = Joi.object({
+  _v: Joi.any(),
   _id: Joi.string(),
   id: Joi.string(),
   active: Joi.boolean(),
@@ -25,6 +26,7 @@ const userSchema = Joi.object({
   },
   currCart: Joi.array().items(
     Joi.object({
+      _v: Joi.any(),
       _id: Joi.string(),
       item: Joi.any(),
       amount: Joi.number().integer().min(1),
@@ -33,6 +35,7 @@ const userSchema = Joi.object({
   ),
   currWishlist: Joi.array().items(
     Joi.object({
+      _v: Joi.any(),
       _id: Joi.string(),
       item: Joi.any(),
       amount: Joi.number().integer().min(1),

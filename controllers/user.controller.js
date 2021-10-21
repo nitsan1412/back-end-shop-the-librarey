@@ -69,7 +69,7 @@ exports.create = (req, res) => {
 
 exports.update = (req, res) => {
   usersModel.findOneAndUpdate(
-    { id: req.body.id },
+    { id: req.params.id },
     { $set: req.body },
     (err, updateUser) => {
       err ? res.status(500).send("error") : res.status(200).send(updateUser);
@@ -77,15 +77,19 @@ exports.update = (req, res) => {
   );
 };
 
-exports.patch = (req, res) => {
-  usersModel.findOneAndUpdate(
-    { id: req.body.id },
-    { $set: req.body },
-    (err, updateUser) => {
-      err ? res.status(500).send("error") : res.status(200).send(updateUser);
-    }
-  );
-};
+// exports.patch = async (req, res) => {
+//   try {
+//     const user = await Users.findOne({
+//       id: req.params.id,
+//     });
+//     if (req.body.currCart) user.currCart = req.body.currCart;
+//     if (req.body.currWishlist) user.currWishlist = req.body.currWishlist;
+//     await user.save();
+//     res.send(user);
+//   } catch {
+//     res.status(404).send(error.message);
+//   }
+// };
 
 exports.delete = (req, res) => {
   usersModel.findOneAndDelete(

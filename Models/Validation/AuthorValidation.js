@@ -1,6 +1,7 @@
 const Joi = require("joi");
 
 const authorSchema = Joi.object({
+  _v: Joi.any(),
   _id: Joi.any(),
   id: Joi.number(),
   firstName: Joi.string().min(2).max(50),

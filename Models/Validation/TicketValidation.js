@@ -1,6 +1,7 @@
 const Joi = require("joi");
 
 const ticketSchema = Joi.object({
+  _v: Joi.any(),
   _id: Joi.string(),
   id: Joi.number(),
   status: Joi.string().pattern(new RegExp("(PENDING)|(ACCEPTED)|(REJECTED)")),
