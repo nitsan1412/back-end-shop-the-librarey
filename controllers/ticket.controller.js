@@ -1,6 +1,5 @@
 require("../data/database");
-const mongoose = require("mongoose");
-
+// const mongoose = require("mongoose");
 const ticketsModel = require("../Models/Tickets");
 
 exports.getAll = async (req, res) => {

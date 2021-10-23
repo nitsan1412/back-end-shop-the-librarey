@@ -1,7 +1,6 @@
 require("../data/database");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const { ObjectId } = require("mongodb");
-
 const ordersModel = require("../Models/Order");
 
 exports.getAll = async (req, res) => {

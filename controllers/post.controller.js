@@ -1,6 +1,5 @@
 require("../data/database");
-const mongoose = require("mongoose");
-
+// const mongoose = require("mongoose");
 const postsModel = require("../Models/Post");
 
 exports.getAll = async (req, res) => {

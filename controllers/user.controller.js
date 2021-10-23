@@ -1,7 +1,6 @@
 require("../data/database");
-const { ObjectId } = require("mongodb");
-const mongoose = require("mongoose");
-
+// const { ObjectId } = require("mongodb");
+// const mongoose = require("mongoose");
 const usersModel = require("../Models/User");
 
 exports.getAll = async (req, res) => {
@@ -40,7 +39,7 @@ exports.getOne = async (req, res) => {
     res.status(500).send(err);
   }
 };
-// ("/users/login")
+
 exports.login = (req, res) => {
   try {
     usersModel
@@ -77,20 +76,6 @@ exports.update = (req, res) => {
   );
 };
 
-// exports.patch = async (req, res) => {
-//   try {
-//     const user = await Users.findOne({
-//       id: req.params.id,
-//     });
-//     if (req.body.currCart) user.currCart = req.body.currCart;
-//     if (req.body.currWishlist) user.currWishlist = req.body.currWishlist;
-//     await user.save();
-//     res.send(user);
-//   } catch {
-//     res.status(404).send(error.message);
-//   }
-// };
-
 exports.delete = (req, res) => {
   usersModel.findOneAndDelete(
     { id: req.body.id },
@@ -100,3 +85,14 @@ exports.delete = (req, res) => {
     }
   );
 };
+
+// const populated =(qurey) =>{
+//    return qurey. populate({
+//     path: "currCart",
+//     populate: { path: "item" },
+//   })
+//   .populate({
+//     path: "currWishlist",
+//     populate: { path: "item" },
+//   })
+// }

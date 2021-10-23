@@ -5,6 +5,7 @@ const authorRouter = require("./routes/authors");
 const postRouter = require("./routes/posts");
 const orderRouter = require("./routes/orders");
 const ticketRouter = require("./routes/tickets");
+// require("../data/database");
 
 const cors = require("cors");
 
@@ -20,14 +21,6 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// app.get("/", (req, res) => {
-//   res.send("hello");
-// });
-
-// app.post("/", (req, res) => {
-//   console.log(req.body.name);
-// });
 
 app.use("/users", userRouter);
 app.use("/products", productRouter);
